@@ -1,0 +1,23 @@
+{% extends 'news/base.html' %}
+{% load staticfiles %}
+
+{% block title %}主页{% endblock %}
+{% block body_block %}
+{% if news %}
+{% for elem in news %}
+<a href="#" class="news-link">
+<div id="news-container" class="col-md-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
+<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+<img src="/{{ elem.picture }}" style="width:100%" alt="{{ elem.id }}" />
+</div>
+<div class="col-md-8" style="float:left;margin-left:0px;">
+<h3 style="margin-top:0px">{{elem.title}}</h3>
+<p style="margin-top:0px">{{elem.pub_date}}</p>
+<p style="margin-top:0px">{{elem.short_content}}</p>
+</div>
+</div>
+</a>
+{% endfor %}
+
+{% endif %}
+{% endblock %}
