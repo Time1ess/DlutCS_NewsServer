@@ -1,0 +1,47 @@
+{% extends 'news/base.html' %}
+{% load staticfiles %}
+
+{% block title %}##新闻名称##{% endblock %}
+
+{% block side_block %}
+
+<span>同类新闻</span>
+<ul class="nav nav-sidebar">
+{% if related_news %}
+{% for r in related %}
+<li><a href="#">{{ r.title }}</a></li>
+{% endfor %}
+<li><a href="#">更多...</a></li>
+{% else %}
+<li> <strong >没有相关新闻.</strong></li>
+{% endif %}
+</ul>
+
+{% endblock %}
+
+
+{% block body_block %}
+
+<div class="col-md-12">
+{% if news %}
+
+<div id="news-container" class="col-md-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
+<div class="col-md-12" style="float:left;margin-left:0px;">
+<h2 style="margin-top:0px">{{news.title}}</h2>
+<hr />
+<p style="text-indent: 0em;"><span>时间:{{news.pub_date}}</span><span style="margin-left:10px">来源:{{news.source}}</span><span style="margin-left:10px">作者:{{news.author}}</span></p>
+<div id="news-content">
+{{news.content|safe}}
+</div>
+</div>
+</div>
+
+{% else %}
+<h1>404错误,请返回首页!</h1>
+{% endif %}
+</div>
+<div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px">
+  <a class="btn btn-default btn-info" href="#body"><span class="glyphicon glyphicon-arrow-up"></span> 返回顶部</a>
+</div>
+
+{% endblock %}

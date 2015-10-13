@@ -33,26 +33,23 @@
 
 
 {% block body_block %}
-{% if news %}
-{% for elem in news %}
-<a href="{% url 'news:news' %}?id={{elem.id}}" class="news-link">
-<div id="news-container" class="col-md-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
-<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
-<img src="/{{ elem.picture }}" style="width:100%" alt="{{ elem.id }}" />
-</div>
-<div class="col-md-8" style="float:left;margin-left:0px;">
-<h3 style="margin-top:0px">{{elem.title}}</h3>
-<p style="margin-top:0px">{{elem.pub_date}}</p>
-<p style="margin-top:0px">{{elem.short_content}}</p>
-</div>
-</div>
-</a>
-{% endfor %}
 
-{% endif %}
+<h3 style="font-size: 30px">关于<span>新闻助手</span></h3>
+<p style="font-size: 20px">本网站采用Python 2.7.9编写,框架使用Django 1.8,数据库MySQL 5.6,前端框架Bootstrap 3</p>
+<p style="font-size: 20px"></p>
+<h4>更新日志:</h4>
+<p>2015.10.13 日志信息更新</p>
+<p>2015.10.13 关于页面UI创建</p>
+<p>2015.10.13 单条新闻数据与模板渲染</p>
+<p>2015.10.13 单条新闻详细UI模板创建</p>
+<p>2015.10.13 热门数据与主页侧边连模板渲染</p>
+<p>2015.10.13 主页导航栏、侧边栏创建</p>
+<p>2015.10.13 主页UI创建</p>
+<p>2015.10.13 MVC模型创建</p>
+<p>2015.10.13 新闻模型创建</p>
+<p>2015.10.13 项目编码启动</p>
 
 <div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px">
-  <a class="btn btn-default btn-info"><span class="glyphicon glyphicon-eye-open"></span> 试试手气</a>
   <a class="btn btn-default btn-info" href="#body"><span class="glyphicon glyphicon-arrow-up"></span> 返回顶部</a>
 </div>
 
