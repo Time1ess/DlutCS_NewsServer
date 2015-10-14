@@ -17,13 +17,13 @@ def index(request):
 
 def news(request):
     news_id=request.GET['id']
-    hot_news=News.objects.all().order_by('-views','-pub_date')[:3]
-    favorite_news=News.objects.all().order_by('-comments','-pub_date')[:3]
     try:
         news=News.objects.get(id=news_id)
         news_type=news.news_type
         guess_you_like=News.objects.exclude(id=news_id).filter(news_type=news_type).order_by('-comments','-pub_date')[:5]
         relative_news=News.objects.exclude(id=news_id).filter(news_type=news_type).order_by('-pub_date')[:5]
+        hot_news=News.objects.all().order_by('-views','-pub_date')[:3]
+        favorite_news=News.objects.all().order_by('-comments','-pub_date')[:3]
         news.views+=1
         news.save()
         return render(request,'news/news.html',{

@@ -29,6 +29,6 @@ class News(models.Model):
         return self.title
 
     def save(self,*args,**kwargs):
-        self.short_content=self.short_content[:90]+'...'
+        self.short_content=self.short_content[:70]+'...'
         super(News,self).save(*args,**kwargs)
 
