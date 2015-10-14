@@ -9,7 +9,7 @@
 <ul class="nav nav-sidebar">
 {% if hot_news %}
 {% for h in hot_news %}
-<li><a href="{% url 'news:news' %}?id={{h.id}}">{{ h.title }}<span style="color: black;float: right;">{{h.views}}次点击</span></a></li>
+<li><a href="{% url 'news:news' %}?id={{h.id}}">{{ h.title }}<span class="badge" style="float: right;">{{h.views}}次</span></a></li>
 {% endfor %}
 <li><a href="#">更多...</a></li>
 {% else %}
@@ -21,7 +21,7 @@
 <ul class="nav nav-sidebar">
 {% if favorite_news %}
 {% for f in favorite_news %}
-<li><a href="{% url 'news:news' %}?id={{f.id}}">{{ f.title }}<span style="color: black;float: right;">{{f.likes}}次有用</span></a></li>
+<li><a href="{% url 'news:news' %}?id={{f.id}}">{{ f.title }}<span class="badge" style="float: right;">{{f.comments}}次</span></a></li>
 {% endfor %}
 <li><a href="#">更多...</a></li>
 {% else %}
@@ -38,6 +38,13 @@
 <p style="font-size: 20px">本网站采用Python 2.7.9编写,框架使用Django 1.8,数据库MySQL 5.6,前端框架Bootstrap 3</p>
 <p style="font-size: 20px"></p>
 <h4>更新日志:</h4>
+<p>2015.10.14 侧边栏UI-badge添加</p>
+<p>2015.10.14 头条板块上线</p>
+<p>2015.10.14 新闻类型分类</p>
+<p>2015.10.14 查看更多功能上线</p>
+<p>2015.10.14 猜你喜欢功能上线</p>
+<p>2015.10.14 同类新闻功能上线</p>
+<p>2015.10.14 单条新闻格式更新</p>
 <p>2015.10.13 日志信息更新</p>
 <p>2015.10.13 关于页面UI创建</p>
 <p>2015.10.13 单条新闻数据与模板渲染</p>

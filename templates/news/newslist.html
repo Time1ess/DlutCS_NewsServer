@@ -1,0 +1,63 @@
+{% extends 'news/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block side_block %}
+
+<span>热门点击</span>
+<ul class="nav nav-sidebar">
+	{% if hot_news %}
+	{% for h in hot_news %}
+	<li><a href="{% url 'news:news' %}?id={{h.id}}">{{ h.title }}<span class="badge" style="float: right;">{{h.views}}次</span></a></li>
+	{% endfor %}
+	<li><a href="#">更多...</a></li>
+	{% else %}
+	<li> <strong >没有相关新闻.</strong></li>
+	{% endif %}
+</ul>
+
+<span>热门评论</span>
+<ul class="nav nav-sidebar">
+	{% if favorite_news %}
+	{% for f in favorite_news %}
+	<li><a href="{% url 'news:news' %}?id={{f.id}}">{{ f.title }}<span class="badge" style=";float: right;">{{ f.comments }}次</span></a></li>
+	{% endfor %}
+	<li><a href="#">更多...</a></li>
+	{% else %}
+	<li> <strong >没有相关新闻.</strong></li>
+	{% endif %}
+</ul>
+
+{% endblock %}
+
+
+{% block body_block %}
+
+{% if news %}
+{% for elem in news %}
+<a href="{% url 'news:news' %}?id={{elem.id}}" class="news-link">
+	<div id="news-container" class="col-md-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
+		<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+			<img src="/{{ elem.picture }}" style="width:100%" alt="{{ elem.id }}" />
+		</div>
+		<div class="col-md-10" style="float:left;margin-left:0px;">
+			<h3 style="margin-top:0px">【{{elem.news_type}}】{{elem.title}}</h3>
+			<p style="margin-top:0px">{{elem.pub_date}}</p>
+			<p style="margin-top:0px">{{elem.short_content}}</p>
+		</div>
+	</div>
+</a>
+{% endfor %}
+<div id="is_more" class="col-md-12 news-link" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
+	<a href="#"><h3><span class="glyphicon glyphicon-refresh"></span> 查看更多...</h3></a>
+
+</div>
+{% endif %}
+
+<div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px">
+	<a class="btn btn-default btn-info"><span class="glyphicon glyphicon-eye-open"></span> 试试手气</a>
+	<a class="btn btn-default btn-info" href="#body"><span class="glyphicon glyphicon-arrow-up"></span> 返回顶部</a>
+</div>
+
+{% endblock %}

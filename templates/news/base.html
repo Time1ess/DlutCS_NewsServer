@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+	<link rel="icon" href="{% static 'favicon.ico' %}">
 
 	<title>新闻助手 - {% block title %}BASE{% endblock %}</title>
 
@@ -24,22 +24,24 @@
   <body id="body">
   	<FONT style="font-family: SimHei;">
 
-  		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  		<div class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
   			<div class="container-fluid">
   				<div class="navbar-header" style="margin-top:-5px;">
   					<a class="navbar-brand" href="#">
-  						<img style="margin-left:5px;" alt="Brand" src="http://getbootstrap.com/favicon.ico">
+  						<img style="margin-left:5px;" alt="Brand" src="{% static 'favicon.ico' %}">
   					</a>
   				</div>
   				<div class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-left">
-  						<li class="active"><a href="{% url 'news:index' %}">首页</a></li>
-  						<li><a href="#" name="top">头条</a></li>
-  						<li><a href="#" name="science">科技</a></li>
-  						<li><a href="#" name="society">社会</a></li>
-  						<li><a href="#" name="entertainment">娱乐</a></li>
-  						<li><a href="#" name="sports">体育</a></li>
-              <li><a href="#" name="others">其他</a></li>
+  						<li {% ifequal title '首页' %}class="active"{% endifequal %}><a href="{% url 'news:index' %}" name="首页">首页</a></li>
+  						<li {% ifequal title '头条' %}class="active"{% endifequal %}><a href="{% url 'news:top_line' %}" name="top">头条</a></li>
+  						<li {% ifequal title '科技' %}class="active"{% endifequal %}><a href="#" name="科技">科技</a></li>
+  						<li {% ifequal title '社会' %}class="active"{% endifequal %}><a href="#" name="社会">社会</a></li>
+  						<li {% ifequal title '娱乐' %}class="active"{% endifequal %}><a href="#" name="娱乐">娱乐</a></li>
+  						<li {% ifequal title '体育' %}class="active"{% endifequal %}><a href="#" name="体育">体育</a></li>
+              <li {% ifequal title '其他' %}class="active"{% endifequal %}><a href="#" name="其他">其他</a></li>
+              <li {% ifequal title '热门点击' %}class="active"{% endifequal %}><a href="#" name="热门点击">热门点击</a></li>
+              <li {% ifequal title '热门评论' %}class="active"{% endifequal %}><a href="#" name="热门评论">热门评论</a></li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
   						<li><a href="#" name="login">登陆</a></li>
@@ -49,7 +51,7 @@
   			</div>
   		</div>
 
-  		<div class="container-fluid">
+  		<div class="container-fluid" >
   			<div class="row">
   				<div class="col-sm-3 col-md-2 sidebar">
   					{% block side_block %}
