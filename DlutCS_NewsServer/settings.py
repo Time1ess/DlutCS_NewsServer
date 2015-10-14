@@ -110,3 +110,22 @@ STATIC_URL = '/static/'
 # Personal settings
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
+#ckeditor settings
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': (
+			['Styles','Format','Font','FontSize'], 
+			['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+			['Undo','Redo','-','RemoveFormat'], 
+			['Bold','Italic','Underline','Strike','-','Subscript','Superscript'], 
+			['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'], 
+			 
+			['Link','Unlink'], 
+			['Table','HorizontalRule','SpecialChar'], 
+
+			['TextColor','BGColor'], 
+		),
+	}
+}
