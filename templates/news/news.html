@@ -36,12 +36,11 @@
 
 <div class="col-md-12">
 	{% if news %}
-
 	<div id="news-container" class="col-md-8" style="border: thin solid rgba(0,0,0,0.2);padding:1%">
 		<div class="col-md-12" style="float:left;margin-left:0px;">
 			<h2 style="margin-top:0px;text-align: center">{{news.title}}</h2>
 			<hr />
-			<p style="text-indent: 0em;text-align: center;"><span>时间:{{news.pub_date}}</span><span style="margin-left:10px">来源:{{news.source}}</span><span style="margin-left:10px">作者:{{news.author}}</span></p>
+			<p style="text-indent: 0em;text-align: center;"><span>时间:{{news.pub_date}}</span><span style="margin-left:10px">来源:{{news.source}}</span><span style="margin-left:10px">作者:{{news.author}}</span><span style="margin-left:10px">阅读:{{news.views}}次</span><span style="margin-left:10px">评论:{{news.comments}}次</span></p>
 			<div class="col-md-12" id="news-content">
 				{{news.content|safe}}
 			</div>
@@ -60,42 +59,41 @@
 				{% else %}
 				<div class="item">
 				{% endifequal %}
-				<a href="{% url 'news:news' %}?id={{news.id}}">
-					<img style="width:320px;height:180px;" src="/{{news.picture}}" alt="{{news.title}}">
-
-					<span style="text-align: left;" href="{% url 'news:news' %}?id={{news.id}}">{{news.title}}</span>
-					</a>
-				</div>
-				{% endfor %}
+						<a href="{% url 'news:news' %}?id={{news.id}}">
+							<img style="width:320px;height:180px;" src="/{{news.picture}}" alt="{{news.title}}">
+							<span style="text-align: left;" href="{% url 'news:news' %}?id={{news.id}}">{{news.title}}</span>
+						</a>
+					</div>
+					{% endfor %}
 			</div>
 		</div>
 		{% else %}
 		<br />
 		<strong >没有相关新闻.</strong>
 		{% endif %}
+
 		<hr />
+
 		<span>同类新闻</span>
 		{% if relative_news %}
 		<div class="col-md-12" style="text-align: left;">
-		<ul class="nav nav-sidebar">
-			{% for r in relative_news %}
-			<li><a href="{% url 'news:news' %}?id={{r.id}}">{{ r.title }}</a></li>
-			{% endfor %}
-			<li><a href="#">更多...</a></li>
-			</ul>
+			<ul class="nav nav-sidebar">
+				{% for r in relative_news %}
+				<li><a href="{% url 'news:news' %}?id={{r.id}}">{{ r.title }}</a></li>
+				{% endfor %}
+				<li><a href="#">更多...</a></li>
+			</ul>			
+		</div>
 		{% else %}
 		<br />
 		<strong>没有相关新闻.</strong>
-		{% endif %}
-		
-		</div>
+		{% endif %}	
 	</div>
 	{% else %}
 	<h1>404错误,请返回首页!</h1>
 	{% endif %}
-</div>
-<div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px">
-	<a class="btn btn-default btn-info" href="#body"><span class="glyphicon glyphicon-arrow-up"></span> 返回顶部</a>
-</div>
+	<div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px">
+		<a class="btn btn-default btn-info" href="#body"><span class="glyphicon glyphicon-arrow-up"></span> 返回顶部</a>
+	</div>
 
-{% endblock %}
+	{% endblock %}
