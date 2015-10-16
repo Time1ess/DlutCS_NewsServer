@@ -102,51 +102,31 @@
 	<div id="comments-container" class="col-md-8" style="margin-top:20px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 		<h2>评论区</h2>
 		<hr />
-
-		<!-- sample No reply-->
+		{% if comments %}
+		{% for comment in comments %}
+		<!-- comment -->
 		<div class="col-md-12" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 			<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 				<img src="{% static 'favicon.ico' %}" style="width:100%" alt="#" />
 			</div>
 			<div class="col-md-10" style="float:left;margin-left:0px;">
-				<h3 style="margin-top:0px"><a href="#"><span>DAVID</span></a><span style="float:right;font-size: 15px;">2015年10月14日 23:43</span></h3>
-				<div class="col-md-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
-				<p style="margin-top:0px">英国女王至今已主持过110场白金汉宫的国宴。据了解，准备国宴也是一件非常复杂繁琐的工程，大约要花费10天的时间。餐桌上摆放的每套餐具之间必须精确相差46厘米，整场国宴要用去1104个玻璃杯，每位客人可拥有一套6件玻璃杯，分</p>
-				</div>
-				<p style="float:right;font-size: 20px;">
-					<button type="button" class="btn btn-primary">
-						<span class="glyphicon glyphicon-thumbs-up" ></span>
-						点赞
-					</button>
-					<button type="button" class="btn btn-primary" style="margin-left:20px;">
-						<span class="glyphicon glyphicon-share"></span>
-						回复
-					</button>
-				</p>
-			</div>
-		</div>
-		<!-- sample over -->
-
-		<!-- sample Reply-->
-		<div class="col-md-12" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
-			<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
-				<img src="{% static 'favicon.ico' %}" style="width:100%" alt="#" />
-			</div>
-			<div class="col-md-10" style="float:left;margin-left:0px;">
-				<h3 style="margin-top:0px"><a href="#"><span>DAVID</span></a><span style="float:right;font-size: 15px;">2015年10月15日 11:06</span></h3>
+				<h3 style="margin-top:0px"><a href="#"><span>{{comment.author}}</span></a><span style="float:right;font-size: 15px;">{{comment.pub_date}}</span></h3>
 				<!-- Reply content -->
+				{% if comment.reply_to %}
 				<div class="col-md-12" style="margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
-				<p style="margin-top:0px"><a href="#"><span>DAVID</span></a><span style="float:right;font-size: 15px;">2015年10月14日 23:43</span></p>
-				<p style="margin-top:0px">在酒水方面，报道称女王不喝酒，中方对酒也没有作明确要求，所以酒不能太过讲究也不能太过寒酸。此外，中方还会自己准备饮用水。报道还称餐后甜点是巧克力布丁，将会被制作成制服纽扣的形状，上面撒满金粉。</p>
+				<p style="margin-top:0px"><a href="#"><span>{{comment.reply_to.author}}</span></a><span style="float:right;font-size: 15px;">{{comment.reply_to.pub_date}}</span></p>
+				<p style="margin-top:0px">{{comment.reply_to.content}}</p>
 				</div>
-				<div class="col-md-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
+				{% endif %}
 				<!-- Reply content over -->
-				<p style="margin-top:0px">英国女王至今已主持过110场白金汉宫的国宴。据了解，准备国宴也是一件非常复杂繁琐的工程，大约要花费10天的时间。餐桌上摆放的每套餐具之间必须精确相差46厘米，整场国宴要用去1104个玻璃杯，每位客人可拥有一套6件玻璃杯，分</p>
+				<div class="col-md-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
+
+				<p style="margin-top:0px">{{comment.content}}</p>
 				</div>
 				<p style="float:right;font-size: 20px;">
 					<button type="button" class="btn btn-primary">
 						<span class="glyphicon glyphicon-thumbs-up" ></span>
-						点赞
+						{{comment.vote_ups}}
 					</button>
 					<button type="button" class="btn btn-primary" style="margin-left:20px;">
 						<span class="glyphicon glyphicon-share"></span>
@@ -155,7 +135,11 @@
 				</p>
 			</div>
 		</div>
-		<!-- sample over -->
+		<!-- comment over -->
+		{% endfor %}
+		{% else %}
+		<h2 style="text-align: center">暂无评论</h2><a href="#" style="float:right">点此发布第一条评论</a>
+		{% endif %}
 	</div>
 </div>
 
