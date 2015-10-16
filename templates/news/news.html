@@ -103,6 +103,35 @@
 		<h2>评论区</h2>
 		<hr />
 		{% if comments %}
+		<div class="col-md-12">
+			<nav style="float:left;">
+				<ul id="comments_list" class="pagination" data-count="{{comments_count}}" style="margin: auto">
+					
+
+					<li id="comments_page_first" >
+						<a onclick="comments_page_change('first')" aria-label="First">
+							<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+						</a>
+					</li>
+					<li id="comments_page_previous">
+						<a onclick="comments_page_change('previous')" aria-label="Previous">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						</a>
+					</li>
+					<li id="comments_page_next">
+						<a onclick="comments_page_change('next')" aria-label="Next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						</a>
+					</li>
+					<li id="comments_page_last">
+						<a onclick="comments_page_change('last')"  aria-label="Last">
+							<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<button type="button" class="btn btn-default btn-primary" style="float:right;">发表评论</button>
+		</div>
 		{% for comment in comments %}
 		<!-- comment -->
 		<div class="col-md-12" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
@@ -114,14 +143,14 @@
 				<!-- Reply content -->
 				{% if comment.reply_to %}
 				<div class="col-md-12" style="margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
-				<p style="margin-top:0px"><a href="#"><span>{{comment.reply_to.author}}</span></a><span style="float:right;font-size: 15px;">{{comment.reply_to.pub_date}}</span></p>
-				<p style="margin-top:0px">{{comment.reply_to.content}}</p>
+					<p style="margin-top:0px"><a href="#"><span>{{comment.reply_to.author}}</span></a><span style="float:right;font-size: 15px;">{{comment.reply_to.pub_date}}</span></p>
+					<p style="margin-top:0px">{{comment.reply_to.content}}</p>
 				</div>
 				{% endif %}
 				<!-- Reply content over -->
 				<div class="col-md-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
 
-				<p style="margin-top:0px">{{comment.content}}</p>
+					<p style="margin-top:0px">{{comment.content}}</p>
 				</div>
 				<p style="float:right;font-size: 20px;">
 					<button type="button" class="btn btn-primary">

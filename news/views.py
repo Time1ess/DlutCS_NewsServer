@@ -26,7 +26,8 @@ def news(request):
         favorite_news=News.objects.all().order_by('-comments','-pub_date')[:3]
         news.views+=1
         news.save()
-        comments=Comment.objects.filter(news=news).order_by('-pub_date')[:5]
+        comments=Comment.objects.filter(news=news).order_by('-pub_date')
+        comments_count=Comment.objects.filter(news=news).count()
         return render(request,'news/news.html',{
             'news':news,
             'hot_news':hot_news,
@@ -34,6 +35,7 @@ def news(request):
             'favorite_news':favorite_news,
             'relative_news':relative_news,
             'comments':comments,
+            'comments_count':comments_count,
             })
     except:
         return render(request,'news/news.html',{
