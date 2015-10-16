@@ -130,7 +130,17 @@
 					</li>
 				</ul>
 			</nav>
-			<button type="button" class="btn btn-default btn-primary" style="float:right;">发表评论</button>
+			<button id="create_a_comment_0" type="button" class="btn btn-default btn-primary" onclick="comment(0)" style="float:right;">发表评论</button>
+		</div>
+		<div class="col-md-12" style="margin-bottom:20px;">
+			<div id="comment_content_0" class="col-md-12 comment_content" style="margin:10px;margin-bottom:20px;height:100px">
+				<label for="comment_input">评论内容：</label>
+				<textarea id="comment_input_0" class="form-control" rows="3" style="resize:none" onkeyup="checkReplyContent(0,0)"></textarea>
+				<div class="form-group" style="text-align: right;margin-top:10px;">
+					<label id="charslabel_0" style="">还可以输入<span id="chars">120</span>字</label>
+					<button type="button" class="btn btn-default btn-info" onclick="submitComment(0)"><span class="glyphicon glyphicon-ok"></span> 提交</button>
+				</div>
+			</div>
 		</div>
 		{% for comment in comments %}
 		<!-- comment -->
@@ -153,21 +163,46 @@
 					<p style="margin-top:0px">{{comment.content}}</p>
 				</div>
 				<p style="float:right;font-size: 20px;">
-					<button type="button" class="btn btn-primary">
+					<button type="button" class="btn btn-primary" onclick="voteup({{comment.id}})">
 						<span class="glyphicon glyphicon-thumbs-up" ></span>
 						{{comment.vote_ups}}
 					</button>
-					<button type="button" class="btn btn-primary" style="margin-left:20px;">
+					<button id="create_a_comment_{{comment.id}}" type="button" class="btn btn-primary" style="margin-left:20px;" onclick="comment({{comment.id}})">
 						<span class="glyphicon glyphicon-share"></span>
 						回复
 					</button>
+					<div class="col-md-12" style="margin-bottom:20px;">
+						<div id="comment_content_{{comment.id}}" class="col-md-12 comment_content" style="margin:10px;margin-bottom:20px;height:100px">
+							<label for="comment_input">评论内容：</label>
+							<textarea id="comment_input_{{comment.id}}" class="form-control" rows="3" style="resize:none" onkeyup="checkReplyContent({{comment.id}})"></textarea>
+							<div class="form-group" style="text-align: right;margin-top:10px;">
+								<label id="charslabel_{{comment.id}}" style="">还可以输入<span id="chars">120</span>字</label>
+								<button type="button" class="btn btn-default btn-info" onclick="submitComment({{comment.id}})"><span class="glyphicon glyphicon-ok"></span> 提交</button>
+							</div>
+						</div>
+					</div>
 				</p>
 			</div>
 		</div>
 		<!-- comment over -->
 		{% endfor %}
 		{% else %}
-		<h2 style="text-align: center">暂无评论</h2><a href="#" style="float:right">点此发布第一条评论</a>
+		<button id="create_a_comment_0" type="button" class="btn btn-default btn-primary" onclick="comment(0)" style="float:right;">发表评论</button>
+		<div class="col-md-12" style="margin-bottom:20px;">
+			<div id="no_comments" style="text-align:center;margin:48.5px;">
+				<h2>暂无评论</h2>
+			</div>
+			<div id="comment_content_0" class="col-md-12 comment_content" style="margin:10px;margin-bottom:20px;height:100px">
+				<label for="comment_input">评论内容：</label>
+				<textarea id="comment_input_0" class="form-control" rows="3" style="resize:none" onkeyup="checkReplyContent(0,0)"></textarea>
+				<div class="form-group" style="text-align: right;margin-top:10px;">
+					<label id="charslabel_0" style="">还可以输入<span id="chars">120</span>字</label>
+					<button type="button" class="btn btn-default btn-info" onclick="submitComment(0)"><span class="glyphicon glyphicon-ok"></span> 提交</button>
+				</div>
+			</div>
+		</div>
+
+
 		{% endif %}
 	</div>
 </div>
