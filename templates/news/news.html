@@ -145,6 +145,8 @@
 				</div>
 			</div>
 		</div>
+		{% else %}
+		<span style="float:right">您必须<a href="#">登录</a>后才能进行评论</span>
 		{% endif %}
 		{% for comment in comments %}
 		<!-- comment -->
@@ -167,7 +169,7 @@
 				</div>
 				{% if user.is_authenticated %}
 				<p style="float:right;font-size: 20px;">
-					<button type="button" class="btn btn-primary" onclick="voteup({{comment.id}})">
+					<button id="voteup_{{comment.id}}" type="button" class="btn btn-primary" onclick="voteup({{comment.id}})">
 						<span class="glyphicon glyphicon-thumbs-up" ></span>
 						{{comment.vote_ups}}
 					</button>

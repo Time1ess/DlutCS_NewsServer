@@ -6,6 +6,7 @@ urlpatterns=[
         url(r'^about/$',views.about,name='about'),
         url(r'^top_line/$',views.top_line,name='top_line'),
         url(r'^comment/$',views.comment,name='comment'),
+        url(r'^voteup/$',views.voteup,name='voteup'),
         ]
 		
 

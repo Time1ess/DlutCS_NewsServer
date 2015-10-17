@@ -80,7 +80,23 @@ def comment(request):
             comment=Comment(author=author,news=news,ip=ip,
                     content=content,reply_to=reply_to)
             comment.save()
+            news.comments+=1
+            news.save()
             return HttpResponse('SUCCESS')
+        except:
+            return HttpResponse('try FAIL')
+    else:
+        return HttpResponse('method FAIL')
+
+@login_required
+def voteup(request):
+    if request.method=='GET':
+        try:
+            comment_id=int(request.GET['comment_id'])
+            comment=Comment.objects.get(id=comment_id)
+            comment.vote_ups+=1
+            comment.save()
+            return HttpResponse(comment.vote_ups)
         except:
             return HttpResponse('try FAIL')
     else:

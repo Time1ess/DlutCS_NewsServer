@@ -185,5 +185,23 @@ function submitComment(id)
 
 function voteup(id)
 {
-	alert(id);
+	var item=$('#voteup_'+id);
+	$.get(
+		'/news/voteup/',
+		{
+			comment_id:id,
+		},
+		function(reply)
+		{
+			if(reply!='try FAIL'&&reply!='method FAIL')
+			{
+				item.html('<span class="glyphicon glyphicon-thumbs-up" ></span> '+reply);
+				alert('投票成功!');
+				item.attr('disabled','disabled');
+			}
+			else
+			{
+				alert('投票失败，请检查网络:'+reply);
+			}
+		})
 }
