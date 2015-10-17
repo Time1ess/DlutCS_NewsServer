@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import News,Comment
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     title=u'Ê×Ò³'
@@ -61,4 +62,28 @@ def top_line(request):
         'favorite_news':favorite_news,
         'news':news,
         })
+
+@login_required
+def comment(request):
+    if request.method=='GET':
+        try:
+            author=request.user
+            news_id=request.GET['news_id']
+            news=News.objects.get(id=news_id)
+            ip=request.META['REMOTE_ADDR']
+            content=request.GET['content']
+            reply_to_id=int(request.GET['reply_to_id'])
+            if reply_to_id==0:
+                reply_to=None
+            else:
+                reply_to=Comment.objects.get(id=reply_to_id)
+            comment=Comment(author=author,news=news,ip=ip,
+                    content=content,reply_to=reply_to)
+            comment.save()
+            return HttpResponse('SUCCESS')
+        except:
+            return HttpResponse('try FAIL')
+    else:
+        return HttpResponse('method FAIL')
+
 

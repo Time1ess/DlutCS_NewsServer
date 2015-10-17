@@ -36,7 +36,7 @@
 
 <div class="col-md-12">
 	{% if news %}
-	<div id="news-container" class="col-md-8" style="border: thin solid rgba(0,0,0,0.2);padding:1%">
+	<div id="news-container" data-news-id="{{news.id}}" class="col-md-8" style="border: thin solid rgba(0,0,0,0.2);padding:1%">
 		<div class="col-md-12" style="float:left;margin-left:0px;">
 			<h2 style="margin-top:0px;text-align: center">{{news.title}}</h2>
 			<hr />
@@ -103,7 +103,7 @@
 		<h2>评论区</h2>
 		<hr />
 		{% if comments %}
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<nav style="float:left;">
 				<ul id="comments_list" class="pagination" data-count="{{comments_count}}" style="margin: auto">
 					
@@ -130,8 +130,11 @@
 					</li>
 				</ul>
 			</nav>
-			<button id="create_a_comment_0" type="button" class="btn btn-default btn-primary" onclick="comment(0)" style="float:right;">发表评论</button>
+
+			
 		</div>
+		{% if user.is_authenticated %}
+		<button id="create_a_comment_0" type="button" class="btn btn-default btn-primary" onclick="comment(0)" style="float:right;">发表评论</button>
 		<div class="col-md-12" style="margin-bottom:20px;">
 			<div id="comment_content_0" class="col-md-12 comment_content" style="margin:10px;margin-bottom:20px;height:100px">
 				<label for="comment_input">评论内容：</label>
@@ -142,9 +145,10 @@
 				</div>
 			</div>
 		</div>
+		{% endif %}
 		{% for comment in comments %}
 		<!-- comment -->
-		<div class="col-md-12" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+		<div id="comment_{{forloop.counter}}" class="col-md-12 comment" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 			<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 				<img src="{% static 'favicon.ico' %}" style="width:100%" alt="#" />
 			</div>
@@ -159,9 +163,9 @@
 				{% endif %}
 				<!-- Reply content over -->
 				<div class="col-md-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
-
-					<p style="margin-top:0px">{{comment.content}}</p>
+					<p style="margin-top:0px;word-break:break-word;">{{comment.content}}</p>
 				</div>
+				{% if user.is_authenticated %}
 				<p style="float:right;font-size: 20px;">
 					<button type="button" class="btn btn-primary" onclick="voteup({{comment.id}})">
 						<span class="glyphicon glyphicon-thumbs-up" ></span>
@@ -182,6 +186,7 @@
 						</div>
 					</div>
 				</p>
+				{% endif %}
 			</div>
 		</div>
 		<!-- comment over -->

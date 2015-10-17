@@ -22,7 +22,8 @@ $(function(){
 		if(i>MAX_PAGE_PER_LINE)
 			$('#page'+i).hide();
 	}
-
+	$('.comment').hide();
+	show_hide_page(1,'SHOW');
 })
 
 function comments_page_change(page)
@@ -82,17 +83,23 @@ function comments_page_change(page)
 	}
 	for(var i=startPage;i<=endPage;i++)
 		$('#page'+i).show();
-	// for(var i=max_message_per_page*(current_page-1)+1,j=max_message_per_page*(page-1)+1;i<=current_page*max_message_per_page;i++,j++)
-	// {
-	// 	var no='#messageNo'+i;
-	// 	$(no).hide();
-	// 	no='#messageNo'+j;
-	// 	$(no).show();
-	// }
+	show_hide_page(current_page,'HIDE');
+	show_hide_page(page,'SHOW');
+
 	current_page=page;
 	return true;
 }
-
+function show_hide_page(page,control)
+{
+	for(var i=COMMENTS_PER_PAGE*(page-1)+1;i<=page*COMMENTS_PER_PAGE;i++)
+	{
+		var no='#comment_'+i;
+		if(control=='HIDE')
+			$(no).hide();
+		else
+			$(no).show();
+	}
+}
 function comment(id)
 {	
 	var comment=$('#comment_content_'+id);
@@ -134,16 +141,46 @@ function checkReplyContent(id)
 	$('#charslabel_'+id).show();
 	var counts=120-content_length;
 	if(counts>=0)
+	{
 		$('#charslabel_'+id).html("还可以输入<span style=\"color:green\">"+counts+"</span>字符");
+		return true;
+	}
 	else
+	{
 		$('#charslabel_'+id).html("<span style=\"color:red;\">输入字数超过限制！</span>");
+		return false;
+	}
 }
 
 function submitComment(id)
 {
 	var content=$("#comment_input_"+id).val();
-	alert(content);
-	//first to check the content is legal
+	if(!checkReplyContent(id))
+	{
+		alert('请检查输入!');
+		return false;
+	}
+	var reply_to_id=id;
+	var news_id=$('#news-container').attr('data-news-id');
+	$.get(
+		'/news/comment/',
+		{
+			news_id:news_id,
+			reply_to_id:reply_to_id,
+			content:content,
+		},
+		function(reply)
+		{
+			if(reply=='SUCCESS')
+			{
+				location.reload();
+
+			}
+			else
+			{
+				alert('评论失败，请检查网络');
+			}
+		})
 }
 
 function voteup(id)
