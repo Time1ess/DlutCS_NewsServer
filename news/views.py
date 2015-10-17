@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import News,Comment
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     title=u'Ê×Ò³'
@@ -26,7 +27,8 @@ def news(request):
         favorite_news=News.objects.all().order_by('-comments','-pub_date')[:3]
         news.views+=1
         news.save()
-        comments=Comment.objects.filter(news=news).order_by('-pub_date')[:5]
+        comments=Comment.objects.filter(news=news).order_by('-pub_date')
+        comments_count=Comment.objects.filter(news=news).count()
         return render(request,'news/news.html',{
             'news':news,
             'hot_news':hot_news,
@@ -34,6 +36,7 @@ def news(request):
             'favorite_news':favorite_news,
             'relative_news':relative_news,
             'comments':comments,
+            'comments_count':comments_count,
             })
     except:
         return render(request,'news/news.html',{
@@ -59,4 +62,44 @@ def top_line(request):
         'favorite_news':favorite_news,
         'news':news,
         })
+
+@login_required
+def comment(request):
+    if request.method=='GET':
+        try:
+            author=request.user
+            news_id=request.GET['news_id']
+            news=News.objects.get(id=news_id)
+            ip=request.META['REMOTE_ADDR']
+            content=request.GET['content']
+            reply_to_id=int(request.GET['reply_to_id'])
+            if reply_to_id==0:
+                reply_to=None
+            else:
+                reply_to=Comment.objects.get(id=reply_to_id)
+            comment=Comment(author=author,news=news,ip=ip,
+                    content=content,reply_to=reply_to)
+            comment.save()
+            news.comments+=1
+            news.save()
+            return HttpResponse('SUCCESS')
+        except:
+            return HttpResponse('try FAIL')
+    else:
+        return HttpResponse('method FAIL')
+
+@login_required
+def voteup(request):
+    if request.method=='GET':
+        try:
+            comment_id=int(request.GET['comment_id'])
+            comment=Comment.objects.get(id=comment_id)
+            comment.vote_ups+=1
+            comment.save()
+            return HttpResponse(comment.vote_ups)
+        except:
+            return HttpResponse('try FAIL')
+    else:
+        return HttpResponse('method FAIL')
+
 
