@@ -34,14 +34,14 @@
   				<div class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-left">
   						<li {% ifequal title '首页' %}class="active"{% endifequal %}><a href="{% url 'news:index' %}" name="首页">首页</a></li>
-  						<li {% ifequal title '头条' %}class="active"{% endifequal %}><a href="{% url 'news:top_line' %}" name="top">头条</a></li>
-  						<li {% ifequal title '科技' %}class="active"{% endifequal %}><a href="#" name="科技">科技</a></li>
-  						<li {% ifequal title '社会' %}class="active"{% endifequal %}><a href="#" name="社会">社会</a></li>
-  						<li {% ifequal title '娱乐' %}class="active"{% endifequal %}><a href="#" name="娱乐">娱乐</a></li>
-  						<li {% ifequal title '体育' %}class="active"{% endifequal %}><a href="#" name="体育">体育</a></li>
-              <li {% ifequal title '其他' %}class="active"{% endifequal %}><a href="#" name="其他">其他</a></li>
-              <li {% ifequal title '热门点击' %}class="active"{% endifequal %}><a href="#" name="热门点击">热门点击</a></li>
-              <li {% ifequal title '热门评论' %}class="active"{% endifequal %}><a href="#" name="热门评论">热门评论</a></li>
+  						<li {% ifequal title '头条' %}class="active"{% endifequal %}><a href="{% url 'news:category' %}?news_type=头条" name="top">头条</a></li>
+  						<li {% ifequal title '科技' %}class="active"{% endifequal %}><a href="{% url 'news:category' %}?news_type=科技" name="科技">科技</a></li>
+  						<li {% ifequal title '社会' %}class="active"{% endifequal %}><a href="{% url 'news:category' %}?news_type=社会" name="社会">社会</a></li>
+  						<li {% ifequal title '娱乐' %}class="active"{% endifequal %}><a href="{% url 'news:category' %}?news_type=娱乐" name="娱乐">娱乐</a></li>
+  						<li {% ifequal title '体育' %}class="active"{% endifequal %}><a href="{% url 'news:category' %}?news_type=体育" name="体育">体育</a></li>
+              <li {% ifequal title '其他' %}class="active"{% endifequal %}><a href="{% url 'news:category' %}?news_type=其他" name="其他">其他</a></li>
+              <li {% ifequal title '热门点击' %}class="active"{% endifequal %}><a href="{% url 'news:hot' %}?hot_type=热门点击" name="热门点击">热门点击</a></li>
+              <li {% ifequal title '热门评论' %}class="active"{% endifequal %}><a href="{% url 'news:hot' %}?hot_type=热门评论" name="热门评论">热门评论</a></li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
   						<li><a href="#" name="login">登陆</a></li>

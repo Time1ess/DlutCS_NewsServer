@@ -16,6 +16,41 @@ def index(request):
         'favorite_news':favorite_news
         })
 
+def category(request):
+    news_type=request.GET['news_type']
+    if news_type=='头条':
+        category_news=News.objects.filter(top_line=news_type)
+    elif news_type=='首页':
+        category_news=News.objects.all()
+    else:
+        category_news=News.objects.filter(news_type=news_type)
+    title=news_type
+    hot_news=category_news.order_by('-views','-pub_date')[:3]
+    favorite_news=category_news.order_by('-comments','-pub_date')[:3]
+    news=category_news.order_by('-pub_date')[:10]
+    return render(request,'news/newslist.html',{
+        'title':title,
+        'hot_news':hot_news,
+        'favorite_news':favorite_news,
+        'news':news,
+        })
+
+def hot(request):
+    hot_type=request.GET['hot_type']
+    if hot_type=='热门点击':
+        hot_type_news=News.objects.all().order_by('-views','-pub_date')[:10]
+    elif hot_type=='热门评论':
+        hot_type_news=News.objects.all().order_by('-comments','-pub_date')[:10]
+    title=hot_type
+    hot_news=News.objects.all().order_by('-views','-pub_date')[:3]
+    favorite_news=News.objects.all().order_by('-comments','-pub_date')[:3]
+    return render(request,'news/newslist.html',{
+        'title':title,
+        'hot_news':hot_news,
+        'favorite_news':favorite_news,
+        'news':hot_type_news,
+        })
+
 def news(request):
     news_id=request.GET['id']
     try:
@@ -49,19 +84,6 @@ def about(request):
     return render(request,'news/about.html',{
         'hot_news':hot_news,
         'favorite_news':favorite_news})
-
-def top_line(request):
-    all_top_line_news=News.objects.filter(top_line=True)
-    title=u'头条'
-    hot_news=all_top_line_news.order_by('-views','-pub_date')[:3]
-    favorite_news=all_top_line_news.order_by('-comments','-pub_date')[:3]
-    news=all_top_line_news.order_by('-pub_date')[:10]
-    return render(request,'news/newslist.html',{
-        'title':title,
-        'hot_news':hot_news,
-        'favorite_news':favorite_news,
-        'news':news,
-        })
 
 @login_required
 def comment(request):
