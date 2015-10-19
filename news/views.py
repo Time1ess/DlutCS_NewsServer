@@ -18,9 +18,9 @@ def index(request):
 
 def category(request):
     news_type=request.GET['news_type']
-    if news_type=='头条':
+    if news_type==u'头条':
         category_news=News.objects.filter(top_line=news_type)
-    elif news_type=='首页':
+    elif news_type==u'首页':
         category_news=News.objects.all()
     else:
         category_news=News.objects.filter(news_type=news_type)
@@ -37,9 +37,9 @@ def category(request):
 
 def hot(request):
     hot_type=request.GET['hot_type']
-    if hot_type=='热门点击':
+    if hot_type==u'热门点击':
         hot_type_news=News.objects.all().order_by('-views','-pub_date')[:10]
-    elif hot_type=='热门评论':
+    elif hot_type==u'热门评论':
         hot_type_news=News.objects.all().order_by('-comments','-pub_date')[:10]
     title=hot_type
     hot_news=News.objects.all().order_by('-views','-pub_date')[:3]

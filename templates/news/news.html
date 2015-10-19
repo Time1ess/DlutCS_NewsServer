@@ -34,20 +34,20 @@
 
 {% block body_block %}
 
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12">
 	{% if news %}
-	<div id="news-container" data-news-id="{{news.id}}" class="col-md-8" style="border: thin solid rgba(0,0,0,0.2);padding:1%">
-		<div class="col-md-12" style="float:left;margin-left:0px;">
+	<div id="news-container" data-news-id="{{news.id}}" class="col-md-8 col-xs-12" style="border: thin solid rgba(0,0,0,0.2);padding:1%">
+		<div class="col-md-12 col-xs-12" style="float:left;margin-left:0px;">
 			<h2 style="margin-top:0px;text-align: center">{{news.title}}</h2>
 			<hr />
 			<p style="text-indent: 0em;text-align: center;"><span>时间:{{news.pub_date}}</span><span style="margin-left:10px">来源:{{news.source}}</span><span style="margin-left:10px">作者:{{news.author}}</span><span style="margin-left:10px">阅读:{{news.views}}次</span><span style="margin-left:10px">评论:{{news.comments}}次</span></p>
-			<div class="col-md-12" id="news-content">
+			<div class="col-md-12 col-xs-12" id="news-content" style="overflow:auto;">
 				{{news.content|safe}}
 			</div>
 		</div>
 	</div>
 
-	<div id="relative-news-container" class="col-md-3" style="text-align:center;float:right;border: thin solid rgba(0,0,0,0.2);padding:1%">
+	<div id="relative-news-container" class="col-md-3 hidden-xs" style="text-align:center;float:right;border: thin solid rgba(0,0,0,0.2);padding:1%">
 
 		<span>猜你喜欢</span>
 		{% if guess_you_like %}
@@ -94,16 +94,16 @@
 		{% endif %}
 	</div>
 </div>
-<div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px;z-index: 100">
+<div class="btn-group hidden-xs" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px;z-index: 100">
 	<a class="btn btn-default btn-primary" href="#body"><span class="glyphicon glyphicon-arrow-up"></span> 返回顶部</a>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12">
 
-	<div id="comments-container" class="col-md-8" style="margin-top:20px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+	<div id="comments-container" class="col-md-8 col-xs-12" style="margin-top:20px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 		<h2>评论区</h2>
 		<hr />
 		{% if comments %}
-		<div class="col-md-10">
+		<div class="col-md-10 col-xs-12">
 			<nav style="float:left;">
 				<ul id="comments_list" class="pagination" data-count="{{comments_count}}" style="margin: auto">
 					
@@ -135,8 +135,8 @@
 		</div>
 		{% if user.is_authenticated %}
 		<button id="create_a_comment_0" type="button" class="btn btn-default btn-primary" onclick="comment(0)" style="float:right;">发表评论</button>
-		<div class="col-md-12" style="margin-bottom:20px;">
-			<div id="comment_content_0" class="col-md-12 comment_content" style="margin:10px;margin-bottom:20px;height:100px">
+		<div class="col-md-12 col-xs-12" style="margin-bottom:20px;">
+			<div id="comment_content_0" class="col-md-12 col-xs-12 comment_content" style="margin:10px;margin-bottom:20px;height:100px">
 				<label for="comment_input">评论内容：</label>
 				<textarea id="comment_input_0" class="form-control" rows="3" style="resize:none" onkeyup="checkReplyContent(0,0)"></textarea>
 				<div class="form-group" style="text-align: right;margin-top:10px;">
@@ -150,21 +150,21 @@
 		{% endif %}
 		{% for comment in comments %}
 		<!-- comment -->
-		<div id="comment_{{forloop.counter}}" class="col-md-12 comment" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
-			<div class="col-md-2" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+		<div id="comment_{{forloop.counter}}" class="col-md-12 col-xs-12 comment" style="float:left;margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+			<div class="col-md-2 hidden-xs" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 				<img src="{% static 'favicon.ico' %}" style="width:100%" alt="#" />
 			</div>
-			<div class="col-md-10" style="float:left;margin-left:0px;">
+			<div class="col-md-10 col-xs-12" style="float:left;margin-left:0px;">
 				<h3 style="margin-top:0px"><a href="#"><span>{{comment.author}}</span></a><span style="float:right;font-size: 15px;">{{comment.pub_date}}</span></h3>
 				<!-- Reply content -->
 				{% if comment.reply_to %}
-				<div class="col-md-12" style="margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
+				<div class="col-md-12 col-xs-12" style="margin-top:10px;margin-left:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">
 					<p style="margin-top:0px"><a href="#"><span>{{comment.reply_to.author}}</span></a><span style="float:right;font-size: 15px;">{{comment.reply_to.pub_date}}</span></p>
 					<p style="margin-top:0px">{{comment.reply_to.content}}</p>
 				</div>
 				{% endif %}
 				<!-- Reply content over -->
-				<div class="col-md-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
+				<div class="col-md-12 col-xs-12" style="padding:0px;margin-top:10px;margin-bottom:10px;">
 					<p style="margin-top:0px;word-break:break-word;">{{comment.content}}</p>
 				</div>
 				{% if user.is_authenticated %}
@@ -193,9 +193,11 @@
 		</div>
 		<!-- comment over -->
 		{% endfor %}
+
 		{% else %}
+		{% if user.is_authenticated %}
 		<button id="create_a_comment_0" type="button" class="btn btn-default btn-primary" onclick="comment(0)" style="float:right;">发表评论</button>
-		<div class="col-md-12" style="margin-bottom:20px;">
+		<div class="col-md-12 col-xs-12" style="margin-bottom:20px;">
 			<div id="no_comments" style="text-align:center;margin:48.5px;">
 				<h2>暂无评论</h2>
 			</div>
@@ -208,6 +210,9 @@
 				</div>
 			</div>
 		</div>
+		{% else %}
+		<span style="float:right">您必须<a href="#">登录</a>后才能进行评论</span>
+		{% endif %}
 
 
 		{% endif %}

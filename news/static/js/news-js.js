@@ -143,7 +143,10 @@ function checkReplyContent(id)
 	if(counts>=0)
 	{
 		$('#charslabel_'+id).html("还可以输入<span style=\"color:green\">"+counts+"</span>字符");
-		return true;
+		if(counts<120)
+			return true;
+		else
+			return false;
 	}
 	else
 	{
