@@ -81,7 +81,7 @@
 					{% for r in relative_news %}
 					<li><a href="{% url 'news:news' %}?id={{r.id}}">{{ r.title }}</a></li>
 					{% endfor %}
-					<li><a href="#">更多...</a></li>
+					<li><a href="{% url 'news:category' %}?news_type={{news.news_type}}">更多...</a></li>
 				</ul>			
 			</div>
 			{% else %}

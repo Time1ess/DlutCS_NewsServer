@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import News,Comment
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.models import User
 
 def index(request):
     title=u'首页'
@@ -124,4 +126,34 @@ def voteup(request):
     else:
         return HttpResponse('method FAIL')
 
+@login_required
+def user_logout(request):
+    logout(request)
+
+    return HttpResponseRedirect('/news/')
+
+def user_login(request):
+    
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(username=username,password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect('/news/')
+            else:
+                return render(request,'news/error.html',
+                        {
+                            'error_message':"用户未激活",
+                            })
+        else:
+            return render(request,'news/error.html',
+                    {
+                        'error_message':"用户信息错误",
+                        })
+    else:
+        return render(request,'news/login.html',{})
 

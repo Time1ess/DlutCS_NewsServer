@@ -44,7 +44,12 @@
               <li {% ifequal title '热门评论' %}class="active"{% endifequal %}><a href="{% url 'news:hot' %}?hot_type=热门评论" name="热门评论">热门评论</a></li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
-  						<li><a href="#" name="login">登陆</a></li>
+            {% if user.is_authenticated %}
+              <li><a>欢迎您,{{ user.username }}</a></li>
+  						<li><a href="{% url 'news:user_logout' %}" name="login">登出</a></li>
+            {% else %}
+              <li><a href="{% url 'news:user_login' %}" name="login">登录</a></li>
+            {% endif %}
   						<li><a href="{% url 'news:about' %}" name="about">关于</a></li>
   					</ul>
   				</div>
