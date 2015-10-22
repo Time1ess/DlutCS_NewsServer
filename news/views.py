@@ -5,6 +5,7 @@ from .models import News,Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
+from random import randint
 
 def index(request):
     title=u'首页'
@@ -156,4 +157,14 @@ def user_login(request):
                         })
     else:
         return render(request,'news/login.html',{})
-
+def random_news(request):
+    news=News.objects.order_by('?')[:10]
+    title=u'随机新闻'
+    hot_news=News.objects.all().order_by('-views','-pub_date')[:3]
+    favorite_news=News.objects.all().order_by('-comments','-pub_date')[:3]
+    return render(request,'news/newslist.html',{
+        'title':title,
+        'hot_news':hot_news,
+        'favorite_news':favorite_news,
+        'news':news,
+        })

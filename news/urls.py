@@ -10,6 +10,7 @@ urlpatterns=[
         url(r'^hot/$',views.hot,name='hot'),
         url(r'^user_logout/',views.user_logout,name='user_logout'),
         url(r'^user_login/',views.user_login,name='user_login'),
+        url(r'^random_news/',views.random_news,name='random_news'),
         ]
 		
 
