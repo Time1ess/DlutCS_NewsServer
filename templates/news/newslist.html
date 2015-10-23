@@ -35,6 +35,7 @@
 {% block body_block %}
 
 {% if news %}
+<div id="news-list">
 {% for elem in news %}
 <a href="{% url 'news:news' %}?id={{elem.id}}" class="news-link">
 	<div id="news-container" class="col-md-12 col-xs-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
@@ -50,12 +51,14 @@
 	</div>
 </a>
 {% endfor %}
-<div id="is_more" class="col-md-12 col-xs-12 news-link" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
-	<a href="{{title}}"><h3><span class="glyphicon glyphicon-refresh"></span> 查看更多...</h3></a>
-
+<a id="more" href="javascript:querymore()" data-type="{{title}}" data-start="0" class="news-link">
+<div id="news-container" class="col-md-12 col-xs-12 news-link" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">
+	<h3><span class="glyphicon glyphicon-refresh"></span> 查看更多...</h3>
 </div>
+</a>
 {% else %}
 <h2>暂无该类新闻</h2>
+</div>
 {% endif %}
 
 <div class="btn-group" role="group" aria-label="..." style="position: fixed;bottom:50px;right:50px;z-index: 100">

@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from random import randint
+import simplejson
+from django.core import serializers
 
 def index(request):
     title=u'首页'
@@ -168,3 +170,26 @@ def random_news(request):
         'favorite_news':favorite_news,
         'news':news,
         })
+
+def query_more(request):
+    news_type=request.GET['news_type']
+    start_num=int(request.GET['start'])
+    new_start=start_num+10
+    try:
+        if news_type and start_num is not None:
+            if news_type==u'头条':
+                news=News.objects.filter(top_line=news_type).order_by('-pub_date')[new_start:new_start+10]
+            elif news_type==u'首页':
+                news=News.objects.all().order_by('-pub_date')[new_start:new_start+10]
+            elif news_type==u'热门点击':
+                news=News.objects.all().order_by('-views','-pub_date')[new_start:new_start+10]
+            elif news_type==u'热门评论':
+                news=News.objects.all().order_by('-comments','-pub_date')[new_start:new_start+10]
+            else:
+                news=News.objects.filter(news_type=news_type).order_by('-pub_date')[new_start:new_start+10]
+            return HttpResponse(serializers.serialize("json",news),content_type="application/json")
+        else:
+            return HttpResponse('FAIL')
+    except:
+        return HttpResponse('QUERY FAIL')
+
