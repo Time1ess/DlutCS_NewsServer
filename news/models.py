@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from get_short_content import ContentParser
+from django.contrib.auth.models import User
 
 news_types=(
         (u'科技',u'科技'),
@@ -33,4 +34,22 @@ class News(models.Model):
         parser.feed(self.content)
         self.short_content=parser.data[:70]+'...'
         super(News,self).save(*args,**kwargs)
+
+class Comment(models.Model):
+    author=models.ForeignKey(User,default=None)
+    news=models.ForeignKey(News,default=None)
+    pub_date=models.DateTimeField(u'发布时间',default=timezone.now)
+    ip=models.GenericIPAddressField(u'IP地址',default=None,blank=True,null=True)
+    content=models.CharField(u'内容',max_length=120,default=None,blank=False,null=False)
+    reply_to=models.ForeignKey('self',blank=True,null=True)
+    vote_ups=models.IntegerField(u'顶',default=0)
+
+    def __unicode__(self):
+        return self.short_content()
+
+    def short_content(self):
+        return self.content[:20]
+
+
+
 
