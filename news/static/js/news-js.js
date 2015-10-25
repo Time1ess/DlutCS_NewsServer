@@ -226,7 +226,8 @@ function querymore()
 			//reply[0].pk
 			if(reply!='FAIL')
 			{
-				amore.attr('data-start',start+10);
+				if(amore.attr('href'))
+					amore.attr('data-start',parseInt(start)+10);
 				if(reply.length<10)
 				{
 					$('#more>div>h3').html('<span class="glyphicon glyphicon-remove"></span> 已无更多...');
@@ -235,17 +236,17 @@ function querymore()
 				for(var i=0;i<reply.length;i++)
 				{
 					var value='<a href="news/?id='+reply[i].pk+'" class="news-link">'+
-						'<div id="news-container" class="col-md-12 col-xs-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">'+
-							'<div class="col-md-2 col-xs-12" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">'+
-								'<img src="/'+reply[i].fields.picture+'" style="width:100%" alt="'+reply[i].fields.picture+'" />'+
-							'</div>'+
-							'<div class="col-md-10 col-xs-12" style="float:left;margin-left:0px;">'+
-								'<h3 style="margin-top:0px">【'+reply[i].fields.news_type+'】'+reply[i].fields.title+'</h3>'+
-								'<p style="margin-top:0px">'+reply[i].fields.pub_date+'</p>'+
-								'<p style="margin-top:0px">'+reply[i].fields.short_content+'</p>'+
-								'<p style="float:right;font-size: 20px;"><span class="label label-primary">阅读量:'+reply[i].fields.views+'次</span>|<span class="label label-primary">评论数:'+reply[i].fields.comments+'次</span></p>'+
-							'</div>'+
-						'</div>'+
+					'<div id="news-container" class="col-md-12 col-xs-12" style="margin:5px;border: thin solid rgba(0,0,0,0.2);padding:1%;">'+
+					'<div class="col-md-2 col-xs-12" style="margin-top:0px;border: thin solid rgba(0,0,0,0.2);padding:1%">'+
+					'<img src="/'+reply[i].fields.picture+'" style="width:100%" alt="'+reply[i].fields.picture+'" />'+
+					'</div>'+
+					'<div class="col-md-10 col-xs-12" style="float:left;margin-left:0px;">'+
+					'<h3 style="margin-top:0px">【'+reply[i].fields.news_type+'】'+reply[i].fields.title+'</h3>'+
+					'<p style="margin-top:0px">'+reply[i].fields.pub_date+'</p>'+
+					'<p style="margin-top:0px">'+reply[i].fields.short_content+'</p>'+
+					'<p style="float:right;font-size: 20px;"><span class="label label-primary">阅读量:'+reply[i].fields.views+'次</span>|<span class="label label-primary">评论数:'+reply[i].fields.comments+'次</span></p>'+
+					'</div>'+
+					'</div>'+
 					'</a>';
 					amore.before(value);
 				}
@@ -255,4 +256,14 @@ function querymore()
 				alert(reply);
 			}
 		})
+	$('#more>div>h3').html('<span class="glyphicon glyphicon-refresh"></span> 加载中...');
 }
+
+$(window).bind("scroll",function() 
+{ 
+	if ($(document).scrollTop() + $(window).height() > $(document).height()-1) 
+	{ 
+		querymore();
+	} 
+
+})
