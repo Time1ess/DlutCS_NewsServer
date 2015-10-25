@@ -18,6 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^grappelli/',include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^news/',include('news.urls',namespace='news')),
 ]

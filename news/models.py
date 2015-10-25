@@ -15,7 +15,7 @@ news_types=(
 
 class News(models.Model):
     title=models.CharField(u'标题',max_length=128,null=False,blank=False)
-    picture=models.ImageField(u'缩略图',upload_to='news_pics',blank=True)
+    picture=models.ImageField(u'缩略图',upload_to='news_pics',blank=True,default='news_pics/default.jpg')
     pub_date=models.DateTimeField(u'发布时间',default=timezone.now)
     author=models.CharField(u'作者',max_length=60,default=u'无')
     views=models.IntegerField(u'点击次数',default=0)

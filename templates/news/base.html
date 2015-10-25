@@ -46,7 +46,10 @@
   					<ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
               <li><a>欢迎您,{{ user.username }}</a></li>
-  						<li><a href="{% url 'news:user_logout' %}" name="login">登出</a></li>
+              <li><a href="/admin" name="admin">控制台</a></li>
+              {% if user.is_superuser %}
+              {% endif %}
+  			  <li><a href="{% url 'news:user_logout' %}" name="login">登出</a></li>
             {% else %}
               <li><a href="{% url 'news:user_login' %}" name="login">登录</a></li>
             {% endif %}
