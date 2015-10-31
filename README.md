@@ -22,10 +22,10 @@
 # How to install
 
 1. execute this in terminal:**sudo pip install -r requirements.txt**
-2. create database in mysql:create database newsserver character SET utf8;
-3. migrate the database:python manage.py migrate
-4. start server:python manage.py runserver IP:PORT
-5. visit in your web browser:http://IP:PORT/news
+2. create database in mysql:**create database newsserver character SET utf8;**
+3. migrate the database:**python manage.py migrate**
+4. start server:**python manage.py runserver IP:PORT**
+5. visit in your web browser:**http://IP:PORT/news**
 
 # Structure
 
