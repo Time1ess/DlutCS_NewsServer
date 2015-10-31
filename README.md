@@ -4,9 +4,10 @@
 # About
 
  * DLUT CS Software Comprehensive Practice
-- Master:stable branch
-- dev分支：team develop branch
-- dev-[NAME]：personal develop branch
+ * Branchs:
+    - Master:stable branch
+    - dev：team develop branch
+    - dev-[NAME]：personal develop branch
 
 # Enviroment
 
@@ -20,11 +21,11 @@
 
 # How to install
 
-1.execute this in terminal:**sudo pip install -r requirements.txt**
-2.create database in mysql:create database newsserver character SET utf8;
-3.migrate the database:python manage.py migrate
-4.start server:python manage.py runserver IP:PORT
-5.visit in your web browser:http://IP:PORT/news
+1. execute this in terminal:**sudo pip install -r requirements.txt**
+2. create database in mysql:create database newsserver character SET utf8;
+3. migrate the database:python manage.py migrate
+4. start server:python manage.py runserver IP:PORT
+5. visit in your web browser:http://IP:PORT/news
 
 # Structure
 
