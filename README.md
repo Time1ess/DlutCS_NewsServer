@@ -1,12 +1,12 @@
-#DLUT News Server-ĞÂÎÅ·şÎñÆ÷
+#DLUT News Server-æ–°é—»æœåŠ¡å™¨
 
 ========================
 # About
 
  * DLUT CS Software Comprehensive Practice
 - Master:stable branch
-- dev·ÖÖ§£ºteam develop branch
-- dev-[NAME]£ºpersonal develop branch
+- devåˆ†æ”¯ï¼šteam develop branch
+- dev-[NAME]ï¼špersonal develop branch
 
 # Enviroment
 
